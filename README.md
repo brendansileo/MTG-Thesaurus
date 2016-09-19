@@ -4,8 +4,9 @@ Magic: The Gathering is a trading card card developed by Wizards of the Coast wh
 This program aims to help with this issue. It accepts the name of a card, and provides a list of similar cards along with a score to give a relative idea of how similar each card is. 
 
 
-TODO: 
-  Add GUI
-  
-  Refine similarity scorer
+<h3>TODO: </h3>
+  <ul>
+    <li>Add GUI</li>
+    <li>Refine similarity scorer</li>
+  </ul>
 
