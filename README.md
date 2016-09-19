@@ -6,5 +6,6 @@ This program aims to help with this issue. It accepts the name of a card, and pr
 
 TODO: 
   Add GUI
+  
   Refine similarity scorer
 
