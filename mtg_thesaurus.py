@@ -3,13 +3,18 @@ import requests
 import re
 import json
 
+from Tkinter import *
 
-print 'Loading cards...'
+root = Tk()
+
 r = requests.get('http://mtgjson.com/json/AllCards.json') #database of all cards in Magic: The Gathering
 res = r.json()
-while True:
+
+
+def findSimilar():
+	listb.pack_forget()
 	target_data = {}
-	target = raw_input('Choose a card:')
+	target = e.get()
 	print 'Collecting target data...'
 	for card in res:
 		card = res[card]
@@ -38,7 +43,7 @@ while True:
 			if target_data['type'] == ["Artifact", "Creature"] or target_data['type'] == ["Enchantment", "Creature"] or target_data['type'] == ["Creature"]:
 				target_data['power'] = card['power']
 				target_data['toughness'] = card['toughness']
-	print target_data
+
 	try:
 		text1 = re.search('.*(?=\()', target_data['text'], re.DOTALL).group()
 		text2 = re.search('(?<=\)).*', target_data['text'], re.DOTALL).group()
@@ -123,6 +128,20 @@ while True:
 				card_scores[card['name']] = score
 	results = sorted(card_scores, key=card_scores.__getitem__)
 	results.reverse()
+	topTen = []
 	for i in results[:10]:
-		print i.encode('ascii','backslashreplace'), card_scores[i]
+		topTen.append((i.encode('ascii','backslashreplace'), card_scores[i])) 
+
+	topTen.reverse()       
+	for item in topTen:                 
+   		listb.insert(0,item)
+
+	listb.pack()                   
+
+e = Entry(root)
+e.pack()
+b = Button(root, text="Go", command=findSimilar)
+b.pack()
+listb = Listbox(root)  
+root.mainloop() 	                
 	
